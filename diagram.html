@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<!-- saved from url=(0067)file:///C:/Users/Uhastre/Downloads/ev_station_erd_spaced%20(1).html -->
+<html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>EV 충전소 ERD with Tooltip</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    .table {
+      border: 2px solid #3498db;
+      border-radius: 8px;
+      padding: 10px;
+      width: 180px;
+      position: absolute;
+      background-color: #f9f9f9;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+    }
+    .view {
+      background-color: #fffbe6 !important;
+      border-color: #f39c12;
+    }
+    .table h3 {
+      background-color: #3498db;
+      color: white;
+      margin: -10px -10px 10px -10px;
+      padding: 8px;
+      font-size: 16px;
+      border-radius: 8px 8px 0 0;
+    }
+    .view h3 {
+      background-color: #f39c12;
+    }
+    .field {
+      margin-left: 10px;
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      cursor: help;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 250px;
+      background-color: #444;
+      color: #fff;
+      text-align: left;
+      border-radius: 6px;
+      padding: 8px;
+      position: absolute;
+      z-index: 10;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -125px;
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 13px;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+    svg {
+      position: absolute;
+      z-index: 0;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+
+
+
+
+  
+  <title>EV 충전소 ERD 전체 구조</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .box {
+      position: absolute;
+      width: 170px;
+      padding: 12px;
+      border: 2px solid #3498db;
+      border-radius: 10px;
+      background-color: #eaf6ff;
+      font-weight: bold;
+      text-align: left;
+    }
+    .view-box {
+      background-color: #fff0cc;
+      border-color: orange;
+    }
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      cursor: help;
+      margin-bottom: 6px;
+    }
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 150px;
+      background-color: #444;
+      color: #fff;
+      text-align: left;
+      padding: 5px 8px;
+      border-radius: 6px;
+      position: absolute;
+      z-index: 1;
+      left: 110%;
+      top: 0;
+      white-space: nowrap;
+    }
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+    }
+    svg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
+
+
+
+<!-- regions -->
+<div class="table" style="top: 80px; left: 40px;">
+  <h3>regions</h3>
+  <div class="tooltip field">🆔 region_id <span class="tooltiptext">지역 ID (PK)</span></div>
+  <div class="tooltip field">📍 region <span class="tooltiptext">예: 강원도</span></div>
+</div>
+
+<!-- districts -->
+<div class="table" style="top: 80px; left: 280px;">
+  <h3>districts</h3>
+  <div class="tooltip field">🆔 district_id <span class="tooltiptext">시군구 ID (PK)</span></div>
+  <div class="tooltip field">🏘️ district_name <span class="tooltiptext">예: 고성군</span></div>
+  <div class="tooltip field">🔗 region_id <span class="tooltiptext">지역 FK</span></div>
+</div>
+
+<!-- station -->
+<div class="table" style="top: 80px; left: 520px;">
+  <h3>station</h3>
+  <div class="tooltip field">🆔 station_id <span class="tooltiptext">충전소 ID (PK)</span></div>
+  <div class="tooltip field">🔌 station_name <span class="tooltiptext">충전소 이름</span></div>
+  <div class="tooltip field">🧑 operator <span class="tooltiptext">운영자</span></div>
+  <div class="tooltip field">🔗 region_id / district_id <span class="tooltiptext">지역 연결 FK</span></div>
+</div>
+
+<!-- facilitytypes -->
+<div class="table" style="top: 80px; left: 760px;">
+  <h3>facilitytypes</h3>
+  <div class="tooltip field">🆔 facility_type_id <span class="tooltiptext">시설유형 ID (PK)</span></div>
+  <div class="tooltip field">🏢 facility_major <span class="tooltiptext">대분류</span></div>
+  <div class="tooltip field">🏠 facility_minor <span class="tooltiptext">소분류</span></div>
+</div>
+
+<!-- region_standard -->
+<div class="table" style="top: 80px; left: 1000px;">
+  <h3>region_standard</h3>
+  <div class="tooltip field">🔄 non_standard <span class="tooltiptext">비표준 지역명</span></div>
+  <div class="tooltip field">📍 standard_region <span class="tooltiptext">표준 지역명</span></div>
+</div>
+
+<!-- ev_subsidy -->
+<div class="table" style="top: 80px; left: 1240px;">
+  <h3>ev_subsidy</h3>
+  <div class="tooltip field">📝 region <span class="tooltiptext">예시: 강원도</span></div>
+  <div class="tooltip field">📝 district_name <span class="tooltiptext">예시: 고성군</span></div>
+  <div class="tooltip field">💰 max_subsidy_ev <span class="tooltiptext">700만원</span></div>
+  <div class="tooltip field">💰 max_subsidy_mini <span class="tooltiptext">400만원</span></div>
+</div>
+
+<!-- installationcoordinates -->
+<div class="table" style="top: 280px; left: 460px;">
+  <h3>installationcoordinates</h3>
+  <div class="tooltip field">🏷️ station_name <span class="tooltiptext">충전소명</span></div>
+  <div class="tooltip field">📍 latitude / longitude <span class="tooltiptext">위도/경도</span></div>
+  <div class="tooltip field">🔢 charger_units <span class="tooltiptext">충전기 수</span></div>
+</div>
+
+<!-- chargers_generated -->
+<div class="table" style="top: 280px; left: 760px;">
+  <h3>chargers_generated</h3>
+  <div class="tooltip field">🆔 charger_id <span class="tooltiptext">충전기 ID</span></div>
+  <div class="tooltip field">⚡ charger_type <span class="tooltiptext">예: DC콤보</span></div>
+  <div class="tooltip field">⏱️ status, available_time <span class="tooltiptext">상태/가능시간</span></div>
+</div>
+
+<!-- Views -->
+<div class="table view" style="top: 520px; left: 500px;">
+  <h3>station_charger_view</h3>
+  <div class="tooltip field">🏷️ station_name</div>
+  <div class="tooltip field">📍 latilon</div>
+  <div class="tooltip field">⚡ charger_type / capacity</div>
+</div>
+
+<div class="table view" style="top: 520px; left: 760px;">
+  <h3>station_charger_filtered</h3>
+  <div class="tooltip field">🏷️ station_name</div>
+  <div class="tooltip field">⚡ charger_type / capacity</div>
+</div>
+
+<!-- SVG 연결선 -->
+<svg width="1600" height="600">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="5" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#333"></path>
+    </marker>
+  </defs>
+  <line x1="240" y1="120" x2="280" y2="120" stroke="#333" stroke-width="2" marker-end="url(#arrow)"><line x1="240" y1="120" x2="280" y2="120" stroke="#333" stroke-width="2" marker-end="url(#arrow)"></line></line>
+  <line x1="300" y1="120" x2="520" y2="120" stroke="#333" stroke-width="2" marker-end="url(#arrow)"><line x1="500" y1="120" x2="520" y2="120" stroke="#333" stroke-width="2" marker-end="url(#arrow)"><line x1="240" y1="120" x2="280" y2="120" stroke="#333" stroke-width="2" marker-end="url(#arrow)"></line></line><line x1="240" y1="120" x2="280" y2="120" stroke="#333" stroke-width="2" marker-end="url(#arrow)"></line></line>
+  <line x1="700" y1="120" x2="760" y2="120" stroke="#333" stroke-width="2" marker-end="url(#arrow)"></line>
+  <line x1="940" y1="120" x2="1000" y2="120" stroke="#333" stroke-width="2" marker-end="url(#arrow)"></line>
+  <line x1="1180" y1="120" x2="1240" y2="120" stroke="#333" stroke-width="2" marker-end="url(#arrow)"></line>
+  <line x1="610" y1="180" x2="610" y2="280" stroke="#333" stroke-width="2" marker-end="url(#arrow)"></line>
+  <line x1="610" y1="180" x2="860" y2="280" stroke="#333" stroke-width="2" marker-end="url(#arrow)"></line>
+  <line x1="550" y1="360" x2="550" y2="520" stroke="#333" stroke-width="2" marker-end="url(#arrow)"></line>
+  <line x1="860" y1="360" x2="860" y2="520" stroke="#333" stroke-width="2" marker-end="url(#arrow)"></line>
+</svg>
+
+
+
+</body></html>
