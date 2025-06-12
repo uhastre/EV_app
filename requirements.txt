@@ -1,0 +1,22 @@
+# Streamlit & Extensions
+streamlit==1.35.0
+streamlit-folium==0.15.0
+
+# Core Data Libraries
+pandas==2.2.2
+numpy>=1.26.4
+
+# Visualization
+matplotlib==3.8.4
+plotly>=5.20.0
+folium==0.16.0
+
+# ML & Data Processing
+scikit-learn==1.4.2
+
+# Database
+sqlalchemy>=2.0.30
+pymysql==1.1.0
+
+# Environment Variables
+python-dotenv==1.0.1
